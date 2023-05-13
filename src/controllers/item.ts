@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { handleHttp } from '../utils/error.handle';
-import { insertItem } from '../services/item';
+import { insertCar, getCars } from '../services/item';
 
 
 const getItem = ( req: Request, res: Response ) => {
@@ -13,10 +13,12 @@ const getItem = ( req: Request, res: Response ) => {
     }
 }
 
-const getItems = ( req: Request, res: Response ) => {
+const getItems = async ( req: Request, res: Response ) => {
     try {
-        console.log( `[GET]: getItems` );
-        res.send( `[GET]: getItems` );
+        const response = await getCars();
+        
+        console.log( response );
+        res.send( response );
     }
     catch( error ) {
         handleHttp( res, 'ERROR_GET_ITEMS' );
@@ -35,7 +37,7 @@ const updateItem = ( req: Request, res: Response ) => {
 
 const postItem = async ( { body }: Request, res: Response ) => {
     try {
-        const response = await insertItem( body );
+        const response = await insertCar( body );
 
         console.log( response );
         res.send( response );
