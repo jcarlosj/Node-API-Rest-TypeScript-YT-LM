@@ -10,8 +10,9 @@ const
     app = express();
 
 // Middlewares
-app.use( cors() );      // Cross-Origin Resource Sharing (CORS)
-app.use( router );      // Item Router
+app.use( cors() );              // Cross-Origin Resource Sharing (CORS)
+app.use( express.json() );      // Se ejecuta automáticamente antes de que la solicitud se pase a los controladores de ruta. Analiza el cuerpo de una solicitud entrante en formato JSON y hacer que esté disponible en los controladores de ruta posteriores.
+app.use( router );              // Dinamic Router
 
 db().then( () => console.log( `Conexión a BD lista` ) );
 

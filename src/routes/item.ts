@@ -1,15 +1,18 @@
 import { Router, Request, Response } from 'express';
+import { deleteItem, getItem, getItems, postItem, updateItem } from '../controllers/item';
 
 
 const router = Router();
 
 
 /**
- * http://localhost:3002/item [GET]
+ * http://localhost:3002/item
  */
-router.get( '/', ( req: Request, res: Response ) => {
-    res.send( { data: 'Aquí van los modelos' } );
-});
+router.get( '/', getItems );
+router.get( '/', getItem );
+router.post( '/', postItem );
+router.put( '/', updateItem );
+router.delete( '/', deleteItem );
 
 
 export { router };
