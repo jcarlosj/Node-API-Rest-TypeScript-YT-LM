@@ -1,6 +1,6 @@
 import { Auth } from "../interfaces/auth.interface";
 import UserModel from "../models/user";
-import { encrypt } from "../utils/pass.handle";
+import { encrypt, verifyPass } from "../utils/pass.handle";
 
 
 const registerNewUser = async ( { email, password } : Auth ) => {
@@ -16,5 +16,20 @@ const registerNewUser = async ( { email, password } : Auth ) => {
     });
 }
 
+const loginUser = async ( { email, password } : Auth ) => {
+    const userFound = await UserModel.findOne({ email });
 
-export { registerNewUser };
+    if ( ! userFound ) return 'NOT_FOUND_USER';
+
+    const isValidPassword = await verifyPass( password, userFound.password );
+
+    if( ! isValidPassword ) return 'INCORRECT_PASSWORD';
+
+    return userFound;
+}
+
+
+export { 
+    registerNewUser,
+    loginUser 
+};

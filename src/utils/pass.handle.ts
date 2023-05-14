@@ -1,15 +1,15 @@
-import { hash } from "bcryptjs"
+import { hash, compare } from "bcryptjs"
 
 const encrypt = async ( pass: string ) => {
     return await hash( pass, 9 );
 }
 
-const verified = () => {
-
+const verifyPass = async ( pass: string, passHash: string ) => {
+    return await compare( pass, passHash );
 }
 
 
 export {
     encrypt,
-    verified
+    verifyPass
 }
