@@ -22,10 +22,15 @@ const updateCar = async ( id: string, item: Car ) => {
     );
 }
 
+const deleteCar = async ( id: string ) => {
+    return await ItemModel.findByIdAndRemove({ _id: id });
+}
+
 
 export {
     insertCar,
     getCars,
     getCar,
-    updateCar
+    updateCar,
+    deleteCar
 }

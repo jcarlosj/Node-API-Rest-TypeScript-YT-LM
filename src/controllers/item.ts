@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { handleHttp } from '../utils/error.handle';
-import { insertCar, getCars, getCar, updateCar } from '../services/item';
+import { insertCar, getCars, getCar, updateCar, deleteCar } from '../services/item';
 
 
 const getItem = async ( { params }: Request, res: Response ) => {
@@ -53,10 +53,13 @@ const postItem = async ( { body }: Request, res: Response ) => {
     }
 }
 
-const deleteItem = ( req: Request, res: Response ) => {
+const deleteItem = async ( { params }: Request, res: Response ) => {
     try {
-        console.log( `[DELETE]: deleteItem` );
-        res.send( `[DELETE]: deleteItem` );
+        const 
+            { id } = params,
+            response = await deleteCar( id );
+        
+        res.send( response );
     }
     catch( error ) {
         handleHttp( res, 'ERROR_DELETE_ITEM' );
