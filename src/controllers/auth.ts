@@ -13,7 +13,10 @@ const login = async ( { body }: Request, res: Response ) => {
         { email, password } = body,
         response = await loginUser({ email, password });
 
-    res.send( response );
+    if( response === 'INCORRECT_PASSWORD' ) 
+        res.status( 403 ).send( response );
+    else
+        res.send( response );
 }
 
 
