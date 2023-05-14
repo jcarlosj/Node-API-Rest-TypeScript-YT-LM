@@ -7,9 +7,10 @@ const getItem = async ( { params }: Request, res: Response ) => {
     try {
         const 
             { id } = params,
-            response = await getCar( id );
+            response = await getCar( id ),
+            data = response ? response : 'NOT_FOUND';
 
-        res.send( response );
+        res.send( data );
     }
     catch( error ) {
         handleHttp( res, 'ERROR_GET_ITEM' );
@@ -18,9 +19,10 @@ const getItem = async ( { params }: Request, res: Response ) => {
 
 const getItems = async ( req: Request, res: Response ) => {
     try {
-        const response = await getCars();
-        
-        console.log( response );
+        const 
+            response = await getCars(),
+            data = response ? response : 'NOT_FOUND';
+
         res.send( response );
     }
     catch( error ) {
@@ -32,9 +34,10 @@ const updateItem = async ( { params, body }: Request, res: Response ) => {
     try {
         const 
             { id } = params,
-            response = await updateCar( id, body );
+            response = await updateCar( id, body ),
+            data = response ? response : 'NOT_FOUND';
 
-        res.send( response );
+        res.send( data );
     }
     catch( error ) {
         handleHttp( res, 'ERROR_UPDATE_ITEM' );
@@ -45,7 +48,6 @@ const postItem = async ( { body }: Request, res: Response ) => {
     try {
         const response = await insertCar( body );
 
-        console.log( response );
         res.send( response );
     }
     catch( error ) {
@@ -57,9 +59,10 @@ const deleteItem = async ( { params }: Request, res: Response ) => {
     try {
         const 
             { id } = params,
-            response = await deleteCar( id );
+            response = await deleteCar( id ),
+            data = response ? response : 'NOT_FOUND';
         
-        res.send( response );
+        res.send( data );
     }
     catch( error ) {
         handleHttp( res, 'ERROR_DELETE_ITEM' );
