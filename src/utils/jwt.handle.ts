@@ -1,22 +1,25 @@
-import { sign, verify } from 'jsonwebtoken';
+import { Jwt, JwtPayload, sign, verify } from 'jsonwebtoken';
 
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || 'g3ner1c-t0k3n';
 
 
 // Generate Token
-const signToken = ( emailUser: string ) => {
-    return sign({ email: emailUser }, JWT_SECRET_KEY, { 
-        expiresIn: '2h'
+const generateToken = ( id: number, emailUser: string ) => {
+    return sign({ 
+        id,
+        email: emailUser 
+    }, JWT_SECRET_KEY, { 
+        expiresIn: '90s'
     });
 }
 
-const verifyToken = async () => {
-
+// Verify valid token
+const verifyToken = ( token: string ) : string | JwtPayload => {
+    return verify( token, JWT_SECRET_KEY );
 }
 
-
 export {
-    signToken,
+    generateToken as signToken,
     verifyToken
 };

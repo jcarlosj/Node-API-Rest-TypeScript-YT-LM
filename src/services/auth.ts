@@ -26,9 +26,15 @@ const loginUser = async ( { email, password } : Auth ) => {
     if( ! isValidPassword ) 
         return 'INCORRECT_PASSWORD';
 
+    const 
+        userData = userFound.toObject(),    // Convierte de doc a POJO: Plain Old JavaScript Object
+        { password: pass, ...includedProperties } = userData;
+
+    // console.info( includedProperties );
+
     return {
-        user: userFound,
-        token: signToken( userFound.email )    // Genera y retorna un token
+        user: includedProperties,
+        token: signToken( userFound.id, userFound.email )    // Genera y retorna un token
     }
 }
 
