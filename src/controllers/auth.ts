@@ -3,6 +3,8 @@ import { loginUser, registerNewUser } from "../services/auth";
 
 
 const register = async ( { body }: Request, res: Response ) => {
+    console.log( body );
+
     const response = await registerNewUser( body );
 
     res.send( response );

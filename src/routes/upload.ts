@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import multerMiddleware from '../middleware/uploadFile';
 import { getFile } from '../controllers/upload';
+import { authUser } from '../middleware/session';
 
 
 const router = Router();
@@ -11,7 +12,7 @@ const router = Router();
 
 const fileUploadFieldName = 'fileToUpload';
 
-router.post( '/', multerMiddleware.single( fileUploadFieldName ), getFile );      // Solo tendran acceso al endpoint usuarios autenticados
+router.post( '/', authUser, multerMiddleware.single( fileUploadFieldName ), getFile );      // Solo tendran acceso al endpoint usuarios autenticados
 
 
 
