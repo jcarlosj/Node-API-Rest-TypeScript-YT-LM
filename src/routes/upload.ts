@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { multerMiddleware } from '../middleware/file';
+import { multerMiddleware } from '../middleware/uploadFile';
 import { getFile } from '../controllers/upload';
 
 
