@@ -4,7 +4,9 @@
   "description": "API Rest escalable usando TypeScript y Express",
   "main": "app.ts",
   "scripts": {
-    "dev": "nodemon ./src/app.ts"
+    "dev": "nodemon ./src/app.ts",
+    "build": "tsc",
+    "start": "node ./dist/app.ts"
   },
   "keywords": [
     "Node",
